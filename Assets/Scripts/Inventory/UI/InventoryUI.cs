@@ -16,6 +16,8 @@ public class InventoryUI : MonoBehaviour
 
     #endregion
 
+    #region PRIVATE VARIABLES
+
     [SerializeField]
     private InventoryObject inventory;
 
@@ -23,6 +25,10 @@ public class InventoryUI : MonoBehaviour
     private GameObject inventorySlotPrefab;
 
     private GameObject[] itemsDisplayed;
+
+    private MouseHandler mouseHandler = new MouseHandler();
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +56,15 @@ public class InventoryUI : MonoBehaviour
             rect.localPosition = GetSlotPosition(i);
 
             itemsDisplayed[i] = slotUI;
+
+            InventorySlot slot = inventory.Slots[i];
+            InventorySlotUI s = itemsDisplayed[i].GetComponent<InventorySlotUI>();
+            s.slot = slot;
+
+            // Register event methods
+            s.StartDrag += mouseHandler.OnStartDrag;
+            s.EndDrag += mouseHandler.OnEndDrag;
+            mouseHandler.SwitchSlots += SwitchSlots;
         }
     }
 
@@ -62,19 +77,29 @@ public class InventoryUI : MonoBehaviour
             
             ItemObject itemObject = inventory.Database.GetItem(slot.ItemID);
             var slotUI = itemsDisplayed[slot.Index];
+
             var slotUIChild = slotUI.transform.GetChild(0);
 
             if(itemObject != null)
             {
                 slotUIChild.gameObject.SetActive(true);
                 slotUIChild.GetComponent<Image>().sprite = inventory.Database.GetItem(slot.ItemID).Icon;
+                slotUIChild.GetComponent<Image>().raycastTarget = false;
                 slotUIChild.GetComponentInChildren<TextMeshProUGUI>().text = slot.Quantity.ToString();            
             }
             else
             {
                 slotUIChild.gameObject.SetActive(false);
             }
+
+
         }
+    }
+
+    private void SwitchSlots(InventorySlot firstSlot, InventorySlot secondSlot)
+    {
+        inventory.Switch(firstSlot, secondSlot);
+        UpdateSlots();
     }
 
     private Vector3 GetSlotPosition(int index)
@@ -84,5 +109,39 @@ public class InventoryUI : MonoBehaviour
 
 
         return result;
+    }
+    public class MouseHandler
+    {
+        private InventorySlot firstSlot = null;
+        private InventorySlot secondSlot = null;
+
+        public delegate void SwitchSlotHandler(InventorySlot firstSlot, InventorySlot secondSlot);
+        public event SwitchSlotHandler SwitchSlots;
+
+        public void OnStartDrag(InventorySlot slot)
+        {
+            firstSlot = slot;
+        }
+
+        public void OnEndDrag(InventorySlot slot)
+        {
+            secondSlot = slot;
+
+            if(firstSlot != null && secondSlot != null)
+            {
+                Debug.Log("yes");
+
+                if(firstSlot.Index != secondSlot.Index)
+                    SwitchSlots(firstSlot, secondSlot);
+            }
+            else
+            {
+                Debug.Log("no");
+            }
+
+            firstSlot = null;
+            secondSlot = null;
+        }
+
     }
 }

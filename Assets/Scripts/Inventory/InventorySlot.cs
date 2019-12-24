@@ -31,7 +31,7 @@ public class InventorySlot
 
     #region Public
 
-    public int ItemID { get { return itemID; } }
+    public int ItemID { get { return itemID; } set { itemID = value; } }
     public int Quantity 
     { 
         get { return quantity; }

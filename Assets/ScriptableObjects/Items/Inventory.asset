@@ -26,14 +26,14 @@ MonoBehaviour:
   - itemID: 3
     quantity: 12
     index: 3
-  - itemID: -1
-    quantity: 0
+  - itemID: 0
+    quantity: 5
     index: 4
-  - itemID: -1
-    quantity: 0
+  - itemID: 4
+    quantity: 1
     index: 5
-  - itemID: -1
-    quantity: 0
+  - itemID: 1
+    quantity: 4
     index: 6
   - itemID: -1
     quantity: 0

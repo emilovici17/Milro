@@ -82,4 +82,29 @@ public class InventoryObject : ScriptableObject
             }
         }
     }
+
+    public void Switch(InventorySlot firstSlot, InventorySlot secondSlot)
+    {
+        if (firstSlot.Index == secondSlot.Index)
+            return;
+
+
+        // Stack items
+        if(firstSlot.ItemID == secondSlot.ItemID)
+        {
+            slots[secondSlot.Index].Quantity += slots[firstSlot.Index].Quantity;
+            slots[firstSlot.Index].ItemID = -1;
+        }
+        else
+        {
+            // Swap items
+            int auxID = secondSlot.ItemID;
+            int auxQuantity = secondSlot.Quantity;
+
+            secondSlot.ItemID = firstSlot.ItemID;
+            secondSlot.Quantity = firstSlot.Quantity;
+            firstSlot.ItemID = auxID;
+            firstSlot.Quantity = auxQuantity;
+        }
+    }
 }
