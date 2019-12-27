@@ -3,10 +3,11 @@ using System.Collections;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
+    public Transform normalTarget;
+    public Transform aimTarget;
 
     public bool lockCursor;
     public float mouseSensitivity = 10;
-    public Transform target;
     public float dstFromTarget = 2;
     public Vector2 pitchMinMax = new Vector2(-40, 85);
 
@@ -16,6 +17,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     float yaw;
     float pitch;
+    private Transform target;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class ThirdPersonCamera : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+        target = normalTarget;
     }
 
     void LateUpdate()
@@ -36,7 +39,14 @@ public class ThirdPersonCamera : MonoBehaviour
         transform.eulerAngles = currentRotation;
 
         transform.position = target.position - transform.forward * dstFromTarget;
-
     }
 
+
+    public void SwitchTarget()
+    {
+        if (target == normalTarget)
+            target = aimTarget;
+        else
+            target = normalTarget;
+    }
 }
