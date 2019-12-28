@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -10,13 +9,15 @@ public class ThirdPersonCamera : MonoBehaviour
     public float mouseSensitivity = 10;
     public float dstFromTarget = 2;
     public Vector2 pitchMinMax = new Vector2(-40, 85);
-
     public float rotationSmoothTime = .12f;
-    Vector3 rotationSmoothVelocity;
-    Vector3 currentRotation;
 
-    float yaw;
-    float pitch;
+    [SerializeField]
+    ThidPersonCamSettingsObject cameraSettings;
+
+    private Vector3 rotationSmoothVelocity;
+    private Vector3 currentRotation;
+    private float yaw;
+    private float pitch;
     private Transform target;
 
     void Start()

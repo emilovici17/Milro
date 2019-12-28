@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public float deltaX = 0.0f;
-    public float deltaY = 0.0f;
+    public float deltaX = -10.0f;
+    public float deltaY = 20.0f;
 
     // Settings related to player movement
     [SerializeField]
@@ -24,10 +24,8 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     Transform cameraT;
     CharacterController controller;
-    [SerializeField]
-    private GameObject chest;
-    [SerializeField]
-    private GameObject body;
+    Transform chest;
+    Transform upperBody;
 
     bool isEquipped = false;
 
@@ -37,6 +35,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         cameraT = Camera.main.transform;
         controller = GetComponent<CharacterController>();
+        upperBody = GetComponentInChildren<ModelBodyParts>().UpperBody;
+        chest = GetComponentInChildren<ModelBodyParts>().Chest;
     }
 
     // Update is called once per frame
@@ -59,8 +59,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isEquipped", isEquipped);
             animator.SetInteger("weaponType", 1);
             Camera.main.GetComponent<ThirdPersonCamera>().SwitchTarget();
-
-
         }
 
         // animator
@@ -74,15 +72,15 @@ public class PlayerController : MonoBehaviour
         if (isEquipped)
         {
             // Chest
-            float xRot = chest.transform.localEulerAngles.x + deltaX;
-            float yRot = chest.transform.localEulerAngles.y + deltaY;
-            float zRot = chest.transform.localEulerAngles.z;           
+            float xRot = chest.localEulerAngles.x + deltaX;
+            float yRot = chest.localEulerAngles.y + deltaY;
+            float zRot = chest.localEulerAngles.z;
 
             chest.transform.localEulerAngles = new Vector3(xRot, yRot, zRot);
 
-            // Body 0 - 55, 360 - 325
+            // UpperBody 0 - 55, 360 - 325
             xRot = Camera.main.transform.localEulerAngles.x;
-            if(xRot > 300.0f)
+            if (xRot > 300.0f)
             {
                 xRot = Mathf.Clamp(xRot, 330.0f, 359.0f);
             }
@@ -92,10 +90,10 @@ public class PlayerController : MonoBehaviour
             }
 
             Debug.Log("xRot: " + xRot);
-            yRot = body.transform.localEulerAngles.x;
-            zRot = body.transform.localEulerAngles.x;
+            yRot = upperBody.localEulerAngles.x;
+            zRot = upperBody.localEulerAngles.x;
 
-            body.transform.localEulerAngles = new Vector3(xRot, yRot, zRot);
+            upperBody.localEulerAngles = new Vector3(xRot, yRot, zRot);
         }
     }
 

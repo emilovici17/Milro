@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cfa331cb5e89d458e179a947fe089a, type: 3}
+  m_Name: Military_1
+  m_EditorClassIdentifier: 
+  ModelPrefab: {fileID: 3751902177852998669, guid: 2c97f17c723f48f4fad29a4fd4f52ebb,
+    type: 3}
+  AnimatorController: {fileID: 9100000, guid: 3246c95d3801db84981fc6fedb33e6f2, type: 2}
+  Avatar: {fileID: 9000000, guid: bf009c67b14b4364597926f388d15f26, type: 3}

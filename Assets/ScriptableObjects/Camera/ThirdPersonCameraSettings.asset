@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb0fec0740aaab418d77cb8aa15171f, type: 3}
+  m_Name: ThirdPersonCameraSettings
+  m_EditorClassIdentifier: 
+  normalTarget: {fileID: 0}
+  aimTarget: {fileID: 0}
+  lockCursor: 0
+  mouseSensitivity: 10
+  distanceFromTarget: 25
+  pitchMinMax: {x: -40, y: 85}
+  rotationSmoothTime: 0.12
+  AimTarget: {fileID: 0}
