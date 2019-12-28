@@ -1528,6 +1528,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086541231}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1103797073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6167904293427101411, guid: bf009c67b14b4364597926f388d15f26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1016200896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1105240880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,7 +2353,8 @@ MonoBehaviour:
   pushForce: 3
   turnSmoothTime: 0.1
   speedSmoothTime: 0.09
-  body: {fileID: 1747803138}
+  chest: {fileID: 1747803138}
+  body: {fileID: 1103797073}
 --- !u!95 &1801961918
 Animator:
   serializedVersion: 3

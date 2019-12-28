@@ -9,19 +9,14 @@ public class PlayerController : MonoBehaviour
     public float deltaX = 0.0f;
     public float deltaY = 0.0f;
 
-    public float walkSpeed = 2;
-    public float runSpeed = 6;
-    public float gravity = -12;
-    public float jumpHeight = 1;
-    [Range(0, 1)]
-    public float airControlPercent;
+    // Settings related to player movement
+    [SerializeField]
+    private MovementSettingsObject movementSettings;
 
+    // Used for interacting with colliders (i.e. player hitting crates)
     public float pushForce = 3.0f;
 
-    public float turnSmoothTime = 0.2f;
     float turnSmoothVelocity;
-
-    public float speedSmoothTime = 0.2f;
     float speedSmoothVelocity;
     float currentSpeed;
     float velocityY;
@@ -62,15 +57,15 @@ public class PlayerController : MonoBehaviour
         {
             isEquipped = !isEquipped;
             animator.SetBool("isEquipped", isEquipped);
-            animator.SetInteger("weaponType", 2);
+            animator.SetInteger("weaponType", 1);
             Camera.main.GetComponent<ThirdPersonCamera>().SwitchTarget();
 
 
         }
 
         // animator
-        float animationSpeedPercent = ((running) ? currentSpeed / runSpeed : currentSpeed / walkSpeed * .6f);
-        animator.SetFloat("speedMove", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
+        float animationSpeedPercent = ((running) ? currentSpeed / movementSettings.RunSpeed : currentSpeed / movementSettings.WalkSpeed * .6f);
+        animator.SetFloat("speedMove", animationSpeedPercent, movementSettings.SpeedSmoothTime, Time.deltaTime);
     }
 
     private void LateUpdate()
@@ -109,7 +104,7 @@ public class PlayerController : MonoBehaviour
         if (inputDir != Vector2.zero || isEquipped)
         {
             float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(turnSmoothTime));
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, GetModifiedSmoothTime(movementSettings.TurnSmoothTime));
 
             // Trigger rotate animation
             if (isEquipped)
@@ -118,10 +113,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(speedSmoothTime));
+        float targetSpeed = ((running) ? movementSettings.RunSpeed : movementSettings.WalkSpeed) * inputDir.magnitude;
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, GetModifiedSmoothTime(movementSettings.SpeedSmoothTime));
 
-        velocityY += Time.deltaTime * gravity;
+        velocityY += Time.deltaTime * movementSettings.Gravity;
         Vector3 velocity = transform.forward * currentSpeed + Vector3.up * velocityY;
 
         controller.Move(velocity * Time.deltaTime);
@@ -139,7 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.isGrounded)
         {
-            float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight * (currentSpeed / 20 + 5f));
+            float jumpVelocity = Mathf.Sqrt(-2 * movementSettings.Gravity * movementSettings.JumpHeight * (currentSpeed / 20 + 5f));
             velocityY = jumpVelocity;
             animator.SetTrigger("jumpTrigger");
             animator.SetBool("isJumping", true);
@@ -153,11 +148,11 @@ public class PlayerController : MonoBehaviour
             return smoothTime;
         }
 
-        if (airControlPercent == 0)
+        if (movementSettings.AirControlPercent == 0)
         {
             return float.MaxValue;
         }
-        return smoothTime / airControlPercent;
+        return smoothTime / movementSettings.AirControlPercent;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
