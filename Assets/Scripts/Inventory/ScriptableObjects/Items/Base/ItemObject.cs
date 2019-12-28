@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "InventorySystem/Items/Default")]
 public class ItemObject : ScriptableObject
 {
+    #region PRIVATE
+
     [SerializeField]
     private int id;
     [SerializeField]
@@ -16,7 +18,9 @@ public class ItemObject : ScriptableObject
     [SerializeField]
     private Sprite icon;
     [SerializeField]
-    private bool isStackable = false;
+    protected bool isStackable = true;
+
+    #endregion
 
     #region Public
 

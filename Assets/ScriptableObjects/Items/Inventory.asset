@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Database: {fileID: 11400000, guid: a7682fa43dbe30046a70e40311bf723f, type: 2}
   slots:
-  - itemID: 0
+  - itemID: 5
     quantity: 1
     index: 0
   - itemID: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
     quantity: 12
     index: 3
   - itemID: 0
-    quantity: 5
+    quantity: 6
     index: 4
   - itemID: 4
     quantity: 1
@@ -35,11 +35,11 @@ MonoBehaviour:
   - itemID: 1
     quantity: 4
     index: 6
-  - itemID: -1
-    quantity: 0
+  - itemID: 6
+    quantity: 1
     index: 7
   - itemID: -1
-    quantity: 0
+    quantity: 1
     index: 8
   - itemID: -1
     quantity: 0

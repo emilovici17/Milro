@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26994056f45548e45a75b6af3259a967, type: 3}
   m_Name: Book
   m_EditorClassIdentifier: 
+  id: 1
   itemType: 1
   name: Book
   description: A simple book written by an unknown author.
   icon: {fileID: 5497963645003432635, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  isStackable: 0

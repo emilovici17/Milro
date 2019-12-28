@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26994056f45548e45a75b6af3259a967, type: 3}
-  m_Name: Letter
+  m_Script: {fileID: 11500000, guid: 1638cb6c126a3ad43bfcf177cf0733bb, type: 3}
+  m_Name: Apple
   m_EditorClassIdentifier: 
-  itemType: 1
-  name: Letter
-  description: A closed letter containing some information.
-  icon: {fileID: -8143364377226028434, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  id: 0
+  itemType: 2
+  name: Apple
+  description: Sweet and fresh fruit.
+  icon: {fileID: -2319894896770420943, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  isStackable: 0

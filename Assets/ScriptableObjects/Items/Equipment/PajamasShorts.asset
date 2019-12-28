@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77fd2649d6026e4b9e88fa26d2a7c94, type: 3}
   m_Name: PajamasShorts
   m_EditorClassIdentifier: 
+  id: 4
   itemType: 3
   name: PajamasShorts
   description: Fancy pajamas shorts.
   icon: {fileID: -2367795693369098819, guid: d07b803c54ae9fb4ebfc1e8a13b12f4c, type: 3}
+  isStackable: 0

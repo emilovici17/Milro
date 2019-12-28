@@ -6,5 +6,6 @@ public enum ItemType
 {
     Default = 1,
     Consumable = 2,
-    Equipment = 3
+    Equipment = 3,
+    Gun = 4
 }
