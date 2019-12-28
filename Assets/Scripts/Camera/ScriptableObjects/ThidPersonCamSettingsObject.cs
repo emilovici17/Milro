@@ -7,12 +7,6 @@ public class ThidPersonCamSettingsObject : ScriptableObject
     #region PRIVATE
 
     [SerializeField]
-    private Transform normalTarget;
-
-    [SerializeField]
-    private Transform aimTarget;
-
-    [SerializeField]
     private bool lockCursor = false;
 
     [SerializeField]
@@ -30,10 +24,6 @@ public class ThidPersonCamSettingsObject : ScriptableObject
     #endregion
 
     #region PUBLIC
-
-    public Transform NormalTarget => normalTarget;
-
-    public Transform AimTarget => aimTarget;
 
     public bool LockCursor => lockCursor;
 

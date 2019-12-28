@@ -5,12 +5,6 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform normalTarget;
     public Transform aimTarget;
 
-    public bool lockCursor;
-    public float mouseSensitivity = 10;
-    public float dstFromTarget = 2;
-    public Vector2 pitchMinMax = new Vector2(-40, 85);
-    public float rotationSmoothTime = .12f;
-
     [SerializeField]
     ThidPersonCamSettingsObject cameraSettings;
 
@@ -22,7 +16,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Start()
     {
-        if (lockCursor)
+        if (cameraSettings.LockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -32,14 +26,14 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
-        pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
-        pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
+        yaw += Input.GetAxis("Mouse X") * cameraSettings.MouseSensitivity;
+        pitch -= Input.GetAxis("Mouse Y") * cameraSettings.MouseSensitivity;
+        pitch = Mathf.Clamp(pitch, cameraSettings.PitchMinMax.x, cameraSettings.PitchMinMax.y);
 
-        currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
+        currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, cameraSettings.RotationSmoothTime);
         transform.eulerAngles = currentRotation;
 
-        transform.position = target.position - transform.forward * dstFromTarget;
+        transform.position = target.position - transform.forward * cameraSettings.DistancetFromTarget;
     }
 
 
