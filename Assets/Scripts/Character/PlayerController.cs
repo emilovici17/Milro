@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     float currentSpeed;
     float velocityY;
 
-    Animator animator;
+    public Animator animator;
     Transform cameraT;
     CharacterController controller;
     Transform chest;
@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+
         cameraT = Camera.main.transform;
         controller = GetComponent<CharacterController>();
         upperBody = GetComponentInChildren<ModelBodyParts>().UpperBody;
